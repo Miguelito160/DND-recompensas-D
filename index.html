@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>D&D Recompensas - Web</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="app-shell">
+    <header>
+      <h1>D&D Recompensas</h1>
+      <p>Versión web basada en tu app actual. Mantiene niveles, rangos, misiones y boosts.</p>
+    </header>
+
+    <main>
+      <section class="card">
+        <h2>Detalles de la sesión</h2>
+        <div class="grid-2">
+          <label>
+            Nombre de la sesión
+            <input id="sessionName" type="text" placeholder="Ingrese el nombre de la misión aquí" />
+          </label>
+          <label>
+            Fecha
+            <input id="sessionDate" type="date" value="" />
+          </label>
+        </div>
+        <label>
+          Tipo de misión
+          <select id="sessionType"></select>
+        </label>
+      </section>
+
+      <section class="card enemies-card">
+        <h2>Enemigos</h2>
+        <div class="tab-buttons">
+          <button type="button" class="tab-button active" data-tab="registry">Registro</button>
+          <button type="button" class="tab-button" data-tab="mission">Misión</button>
+        </div>
+
+        <div class="tab-panel active" id="enemyRegistryPanel">
+          <div class="grid-3">
+            <label>
+              Nombre del enemigo
+              <input id="registryEnemyName" type="text" placeholder="Nombre del enemigo" />
+            </label>
+            <label>
+              XP por unidad
+              <input id="registryEnemyXp" type="number" min="0" value="0" />
+            </label>
+            <label>
+              <span>&nbsp;</span>
+              <button class="outline" id="addEnemyType">Registrar enemigo</button>
+            </label>
+          </div>
+          <div class="grid-2 search-row">
+            <label>
+              Buscar enemigo
+              <input id="enemySearch" type="search" placeholder="Buscar por nombre..." />
+            </label>
+          </div>
+          <div class="list-box compact">
+            <h3>Catálogo de enemigos</h3>
+            <ul id="enemyRegistryList"></ul>
+          </div>
+        </div>
+
+        <div class="tab-panel" id="enemyMissionPanel" hidden>
+          <div class="grid-3">
+            <label>
+              Enemigo registrado
+              <select id="enemyTypeSelect"></select>
+            </label>
+            <label>
+              XP por unidad
+              <input id="enemyXp" type="number" min="0" value="0" disabled />
+            </label>
+            <label>
+              Cuántos quieres agregar
+              <input id="enemyCount" type="number" min="1" value="1" />
+            </label>
+          </div>
+          <button class="outline" id="addEnemy">Añadir enemigo a la misión</button>
+          <div class="list-box compact">
+            <h3>Lista de enemigos</h3>
+            <ul id="enemyList"></ul>
+          </div>
+        </div>
+      </section>
+
+      <section class="card">
+        <h2>Jugadores</h2>
+        <div class="grid-2">
+          <label>
+            Nombre completo
+            <input id="playerName" type="text" placeholder="Ej: Juan P." />
+          </label>
+          <label>
+            Nivel del jugador
+            <select id="playerLevel"></select>
+          </label>
+        </div>
+        <div class="grid-3">
+          <label>
+            Dificultad de la misión
+            <select id="playerDifficulty"></select>
+          </label>
+          <label>
+            Rango de aventurero
+            <select id="playerRank"></select>
+          </label>
+          <label>
+            Tiene boost
+            <select id="playerBoostFlag">
+              <option value="no">No</option>
+              <option value="si">Sí</option>
+            </select>
+          </label>
+        </div>
+        <div class="grid-3 boost-row">
+          <label>
+            Tipo de boost
+            <select id="playerBoostType">
+              <option>Dinero</option>
+              <option>Experiencia</option>
+              <option>Ambas</option>
+            </select>
+          </label>
+          <label>
+            % Boost
+            <input id="playerBoostPercent" type="number" min="1" max="100" value="10" />
+          </label>
+          <label>
+            Motivo
+            <input id="playerBoostReason" type="text" placeholder="Motivo opcional" />
+          </label>
+        </div>
+        <div class="button-row">
+          <button class="outline" id="addPlayer">Añadir jugador</button>
+          <button class="outline" id="cancelEditPlayer" hidden>Cancelar edición</button>
+        </div>
+        <div class="list-box">
+          <h3>Lista de jugadores</h3>
+          <ul id="playerList"></ul>
+        </div>
+      </section>
+
+      <section class="card report-card">
+        <h2>Reporte</h2>
+        <div class="report-actions">
+          <button id="generateReport">Generar reporte</button>
+          <button id="clearAll" class="danger">Limpiar todo</button>
+        </div>
+        <textarea id="reportText" readonly placeholder="Aquí aparecerá el reporte..."></textarea>
+      </section>
+    </main>
+  </div>
+
+  <script src="enemy_data.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
